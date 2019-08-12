@@ -46,22 +46,15 @@ class Song
 
 
   def self.new_from_filename(file_name)
-    row = filename
-
-        data = row.split(" - ")
-       artist_name = data[0]
-       song_name = data[1].gsub(".mp3", "")
-
-      song = self.new
-     song.name = song_name
-     song.artist_name = artist_name
-     song
+   song_array = file_name.split(" - ")
+   song_array[1] = song_array[1].chomp(".mp3")
+   song = self.new
+   song.name = song_array[1]
+   song.artist_name = song_array[0]
+   song
   end
 
   def self.create_from_filename
-    song = self.new_from_filename(filename)
-  song.save
-  song
   end
   def self.destroy_all
     @@all.clear
